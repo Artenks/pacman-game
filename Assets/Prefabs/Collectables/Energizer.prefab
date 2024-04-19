@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -2796814222878567506, guid: 6a8d69e2d8d76884e96b2814234122ab,
@@ -100,6 +101,17 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2283740690488131621, guid: 6a8d69e2d8d76884e96b2814234122ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 698383229674297691}
+    - targetCorrespondingSourceObject: {fileID: 2283740690488131621, guid: 6a8d69e2d8d76884e96b2814234122ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9129813054921227804}
   m_SourcePrefab: {fileID: 100100000, guid: 6a8d69e2d8d76884e96b2814234122ab, type: 3}
 --- !u!1 &3457708435146406798 stripped
 GameObject:
@@ -133,3 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duration: 6
+  GhostScoreData:
+    GhostScore: 0
+    GhostScoreIncrement: 200

@@ -7,13 +7,13 @@ public enum GhostType
     Inky,
     Clyde
 }
-public class GhostView : MonoBehaviour
+public class GhostView : BaseView
 {
     public CharacterMotor CharacterMotor;
     public GhostAI GhostAI;
     public Animator Animator;
     public GhostType GhostType;
-    void Start()
+    private void Start()
     {
         Animator.SetInteger("GhostType", (int)GhostType);
 
