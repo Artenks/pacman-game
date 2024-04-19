@@ -14,7 +14,6 @@ public class Collectible : MonoBehaviour
     {
         if (gameObject.CompareTag("Cherry") || gameObject.CompareTag("Strawberry"))
         {
-            Debug.Log("CollectibleEvent");
             OnSpecialFruits?.Invoke(this, gameObject);
         }
 

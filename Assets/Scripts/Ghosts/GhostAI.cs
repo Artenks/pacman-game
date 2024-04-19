@@ -14,6 +14,8 @@ public class GhostAI : MonoBehaviour
 {
     public event Action<GhostState> OnGhostStateChanged;
 
+    public event Action<GhostAI> OnGhoustCaught;
+
     public float VulnerabilityEndingTime;
 
     private GhostMove _ghostMove;
@@ -33,8 +35,9 @@ public class GhostAI : MonoBehaviour
     }
     public void SetVulnerable(float duration)
     {
-        if (_ghostState == GhostState.Defeated) return;
-        
+        if (_ghostState == GhostState.Defeated)
+            return;
+
         _vulnerabilityTimer = duration;
         _ghostState = GhostState.Vulnerable;
         OnGhostStateChanged?.Invoke(_ghostState);
@@ -133,6 +136,7 @@ public class GhostAI : MonoBehaviour
                 {
                     _ghostState = GhostState.Active;
                     OnGhostStateChanged?.Invoke(_ghostState);
+                    //OnGhoustCaught?.Invoke(this);
                 }
 
                 break;
@@ -155,6 +159,8 @@ public class GhostAI : MonoBehaviour
                 {
                     _ghostState = GhostState.Defeated;
                     OnGhostStateChanged?.Invoke(_ghostState);
+
+                    OnGhoustCaught?.Invoke(this);
                 }
                 break;
         }

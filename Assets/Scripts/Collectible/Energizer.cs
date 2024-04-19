@@ -3,6 +3,7 @@ using UnityEngine;
 public class Energizer : MonoBehaviour
 {
     public float Duration;
+    public GhostScoreData GhostScoreData;
 
     private void OnTriggerEnter2D(Collider2D _)
     {
@@ -12,5 +13,9 @@ public class Energizer : MonoBehaviour
         {
             ghost.SetVulnerable(Duration);
         }
+
+        var scoreManager = FindObjectOfType<ScoreManager>();
+
+        scoreManager.EnergizerActivated(GhostScoreData);
     }
 }

@@ -5,10 +5,13 @@ public class ScoreManager : MonoBehaviour
 {
     public event Action<int> OnScoreChanged;
     public event Action<int> OnHighScoreChanged;
+    public event Action<int, GhostAI> OnShowGhostScore;
 
     private int _currentScore;
 
     private int _highScore;
+    private GhostScoreData _ghostScoreData;
+    private int _currentGhostCaughtCount;
 
     public int CurrentScore
     {
@@ -29,23 +32,47 @@ public class ScoreManager : MonoBehaviour
             collectible.OnCollected += Collectible_OnCollected;
         }
 
-        var eatGhost = FindObjectOfType<EatGhost>();
-        eatGhost.OnEatGhost += EatGhost_OnEatGhost;
-    }
+        //var eatGhost = FindObjectOfType<EatGhost>();
+        //eatGhost.OnEatGhost += EatGhost_OnEatGhost;
 
-    private void EatGhost_OnEatGhost(int totalScore)
-    {
-        _currentScore += totalScore;
-        if (_currentScore >= _highScore)
+        var allGhosts = FindObjectsOfType<GhostAI>();
+        foreach (var ghost in allGhosts)
         {
-            _highScore = _currentScore;
-            OnHighScoreChanged?.Invoke(_highScore);
+            ghost.OnGhoustCaught += GhostAI_OnGhoustCaught;
         }
-
-        OnScoreChanged?.Invoke(_currentScore);
     }
+
+    private void GhostAI_OnGhoustCaught(GhostAI ghost)
+    {
+        _currentGhostCaughtCount++;
+
+        int score = _ghostScoreData.GhostScore + _ghostScoreData.GhostScoreIncrement * _currentGhostCaughtCount;
+
+        AddScore(score);
+
+        OnShowGhostScore?.Invoke(score, ghost);
+
+        Debug.Log($"devorados:{_currentGhostCaughtCount} | +{_ghostScoreData.GhostScoreIncrement * _currentGhostCaughtCount}");
+    }
+
+    //private void EatGhost_OnEatGhost(int score)
+    //{
+    //    AddScore(score);
+    //}
 
     private void Collectible_OnCollected(int score, Collectible collectible)
+    {
+        AddScore(score);
+
+        collectible.OnCollected -= Collectible_OnCollected;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("high-score", _highScore);
+    }
+
+    private void AddScore(int score)
     {
         _currentScore += score;
         OnScoreChanged?.Invoke(_currentScore);
@@ -55,11 +82,11 @@ public class ScoreManager : MonoBehaviour
             _highScore = _currentScore;
             OnHighScoreChanged?.Invoke(_highScore);
         }
-        collectible.OnCollected -= Collectible_OnCollected;
     }
 
-    private void OnDestroy()
+    public void EnergizerActivated(GhostScoreData ghostScoreData)
     {
-        PlayerPrefs.SetInt("high-score", _highScore);
+        _ghostScoreData = ghostScoreData;
+        _currentGhostCaughtCount = 0;
     }
 }
