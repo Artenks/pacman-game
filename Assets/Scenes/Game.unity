@@ -919,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 789005673}
     - target: {fileID: 2031901076, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
       propertyPath: PauseTime
-      value: 3
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 2031901076, guid: ec7abb1ac6ef8af4899fe1e11593106c, type: 3}
       propertyPath: AudioSource

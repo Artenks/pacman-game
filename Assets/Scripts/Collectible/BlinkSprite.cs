@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -7,20 +8,31 @@ public class BlinkSprite : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
-    private float _nextStateChange;
+    private bool _canBlink = true;
+
     private void Start()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.enabled = true;
-        _nextStateChange = Time.time + Interval;
     }
 
     private void Update()
     {
-        if (Time.time > _nextStateChange)
-        {
-            _spriteRenderer.enabled = !_spriteRenderer.enabled;
-            _nextStateChange += Interval;
-        }
+        StartCoroutine(BlinkSpriteCoroutine());
     }
+
+    protected IEnumerator BlinkSpriteCoroutine()
+    {
+        if (!_canBlink)
+            yield break;
+
+        _canBlink = false;
+
+        yield return new WaitForSeconds(Interval);
+
+        _spriteRenderer.enabled = !_spriteRenderer.enabled;
+
+        _canBlink = true;
+    }
+
 }
