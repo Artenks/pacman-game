@@ -29,7 +29,6 @@ public class GhostHouse : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var ghost = other.GetComponent<GhostAI>();
-        ghost.Recover();
 
         if (_allGhost.Count == 0)
         {

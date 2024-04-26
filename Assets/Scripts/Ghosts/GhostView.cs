@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public enum GhostType
@@ -9,6 +10,8 @@ public enum GhostType
 }
 public class GhostView : BaseView
 {
+    public TextMeshProUGUI StateText;
+
     public CharacterMotor CharacterMotor;
     public GhostAI GhostAI;
     public Animator Animator;
@@ -19,6 +22,11 @@ public class GhostView : BaseView
 
         CharacterMotor.OnDirectionChanged += CharacterMotor_OnDirectionChanged;
         GhostAI.OnGhostStateChanged += GhostAI_OnGhostStateChanged;
+
+    }
+    private void Update()
+    {
+        StateText.text = GhostAI._nowGhostMachineState.GetState().ToString();
     }
 
     private void GhostAI_OnGhostStateChanged(GhostState ghostState)
