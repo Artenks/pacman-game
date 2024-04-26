@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PacmanView : BaseView
@@ -15,7 +16,7 @@ public class PacmanView : BaseView
         CharacterMotor.OnDirectionChanged += CharacterMotor_OnDirectionChanged;
         CharacterLife.OnLifeRemoved += CharacterLife_OnLifeRemoved;
         CharacterMotor.OnResetPosition += CharacterMotor_OnResetPosition;
-        CharacterMotor.OnDisabled += CharacterMotor_OnDisabled;
+        CharacterMotor.Disable += CharacterMotor_OnDisabled;
 
         Animator.SetBool("Moving", false);
         Animator.SetBool("Dead", false);
@@ -30,7 +31,9 @@ public class PacmanView : BaseView
     {
         Animator.SetBool("Moving", false);
         Animator.SetBool("Dead", false);
+        Animator.speed = 1;
     }
+
 
     private void CharacterLife_OnLifeRemoved(int _)
     {

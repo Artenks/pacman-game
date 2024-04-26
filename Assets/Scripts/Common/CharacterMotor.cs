@@ -15,7 +15,7 @@ public class CharacterMotor : MonoBehaviour
     public event Action<Direction> OnDirectionChanged;
     public event Action OnAlignedWithGrid;
     public event Action OnResetPosition;
-    public event Action OnDisabled;
+    public event Action Disable;
     public event Action<float> OnSpeedSpecial;
 
 
@@ -219,8 +219,9 @@ public class CharacterMotor : MonoBehaviour
 
     private void OnDisable()
     {
-        OnDisabled?.Invoke();
+        Disable?.Invoke();
     }
+
 
     private void OnDrawGizmos()
     {
