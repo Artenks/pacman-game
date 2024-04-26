@@ -8,6 +8,11 @@ public class GhostHouse : MonoBehaviour
 
     private float _leaveHouseTimer;
 
+    public void Reset()
+    {
+        _leaveHouseTimer += LeaveHouseInterval;
+    }
+
     private void Awake()
     {
         _allGhost = new List<GhostAI>();
