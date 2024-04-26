@@ -51,7 +51,7 @@ public class Active : GhostMachineState
         if (_getOutHouse)
         {
             var seeDistance = GhostMove.transform.position - new Vector3(0, 3, 0);
-            if (seeDistance.magnitude <= 0.2f)
+            if (seeDistance.magnitude <= 0.1f)
             {
                 GhostMove.CharacterMotor.CollideWithGates(true);
                 GhostMove.SetTargetMoveLocation(Pacman.position);
@@ -64,12 +64,12 @@ public class Active : GhostMachineState
         }
         else
         {
-            if (GhostMove.transform.position == Vector3.zero)
-            {
-                _getOutHouse = true;
-            }
-
             GhostMove.SetTargetMoveLocation(Pacman.position);
+        }
+
+        if (GhostMove.transform.position == Vector3.zero)
+        {
+            _getOutHouse = true;
         }
 
 

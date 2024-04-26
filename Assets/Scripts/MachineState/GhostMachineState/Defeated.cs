@@ -17,14 +17,14 @@ public class Defeated : GhostMachineState
     protected override void Update()
     {
         var seeDistance = GhostMove.transform.position - new Vector3(0, 3, 0);
-        if (seeDistance.magnitude <= 0.05f)
+        if (seeDistance.magnitude <= 0.1f)
         {
             GhostMove.SetTargetMoveLocation(Vector3.zero);
             GhostMove.CharacterMotor.CollideWithGates(false);
         }
 
         seeDistance = GhostMove.transform.position - Vector3.zero;
-        if (seeDistance.magnitude <= 0.05f)
+        if (seeDistance.magnitude <= 0.1f)
         {
             GhostMove.CharacterMotor.CollideWithGates(true);
 
